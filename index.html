@@ -3,10 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <title>My First Website</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    /* Chatbot floating container */
+    .chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 380px;
+      height: 600px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+    }
+  </style>
 </head>
+
 <body>
   <h1>Hello 👋 My Website is Live</h1>
   <p>GitHub Pages is working correctly.</p>
+
+  <!-- Zapier Chatbot Embed -->
+  <div class="chatbot-container">
+    <iframe
+      src="<iframe src='https://interfaces.zapier.com/embed/chatbot/cmj12dql7000kmnikf59k9g4v' height='600px' width='400px' allow='clipboard-write *' style="border: none;"></iframe>"
+      width="100%"
+      height="100%"
+      style="border: none;"
+      allow="clipboard-write *">
+    </iframe>
+  </div>
+
 </body>
 </html>
-
