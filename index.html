@@ -69,10 +69,33 @@
       background: #8f0000;
     }
 
-    /* Chatbot */
+    /* Snow animation */
+    .snow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(white 1px, transparent 1.5px);
+      background-size: 70px 70px;
+      animation: snow 25s linear infinite;
+      opacity: 0.3;
+      z-index: 1;
+    }
+
+    @keyframes snow {
+      from { background-position: 0 0; }
+      to { background-position: 0 100%; }
+    }
+
+    footer {
+      padding: 20px;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* Chatbot container (hidden by default) */
     .chatbot-container {
       position: fixed;
-      bottom: 20px;
+      bottom: 90px;
       right: 20px;
       width: 380px;
       height: 600px;
@@ -80,35 +103,44 @@
       overflow: hidden;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
       z-index: 9999;
+      display: none;
+      background: white;
     }
 
-    /* Snow animation */
-    .snow {
+    /* Chat toggle button */
+    .chat-toggle {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      background-image: radial-gradient(white 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: snow 10s linear infinite;
-      opacity: 0.4;
+      bottom: 20px;
+      right: 20px;
+      background: #b30000;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 15px 22px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      z-index: 10000;
     }
 
-    @keyframes snow {
-      from {
-        background-position: 0 0;
-      }
-      to {
-        background-position: 0 100%;
-      }
+    .chat-toggle:hover {
+      background: #8f0000;
     }
 
-    footer {
-      padding: 20px;
-      font-size: 0.9rem;
-      opacity: 0.9;
+    /* Santa helper message */
+    .santa-message {
+      position: fixed;
+      bottom: 150px;
+      right: 20px;
+      background: white;
+      color: #b30000;
+      padding: 12px 18px;
+      border-radius: 16px;
+      font-size: 0.95rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+      display: none;
+      z-index: 9999;
     }
   </style>
 </head>
@@ -132,8 +164,13 @@
     <a class="cta" href="#">Shop Now 🎁</a>
   </section>
 
+  <!-- Santa helper message -->
+  <div id="santaMessage" class="santa-message">
+    🎅 Ho Ho Ho! Santa’s helper is here to guide your Christmas shopping 🎄
+  </div>
+
   <!-- Zapier Chatbot -->
-  <div class="chatbot-container">
+  <div class="chatbot-container" id="chatbot">
     <iframe
       src="https://interfaces.zapier.com/embed/chatbot/cmj12dql7000kmnikf59k9g4v"
       width="100%"
@@ -143,9 +180,32 @@
     </iframe>
   </div>
 
+  <!-- Chat toggle button -->
+  <button class="chat-toggle" id="chatToggle">
+    🎅 Ask Santa’s Helper
+  </button>
+
   <footer>
     © 2025 Christmas Shop 🎄 Made with ❤️ & holiday magic
   </footer>
+
+  <!-- Chat toggle logic -->
+  <script>
+    const toggleBtn = document.getElementById("chatToggle");
+    const chatbot = document.getElementById("chatbot");
+    const santaMessage = document.getElementById("santaMessage");
+
+    toggleBtn.addEventListener("click", () => {
+      const isOpen = chatbot.style.display === "block";
+
+      chatbot.style.display = isOpen ? "none" : "block";
+      santaMessage.style.display = isOpen ? "none" : "block";
+
+      toggleBtn.textContent = isOpen
+        ? "🎅 Ask Santa’s Helper"
+        : "❄️ Close Chat";
+    });
+  </script>
 
 </body>
 </html>
