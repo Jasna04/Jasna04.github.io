@@ -1,0 +1,38 @@
+signup.html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup</title>
+  <meta charset="UTF-8" />
+</head>
+<body>
+
+  <h2>Signup</h2>
+
+  <form method="POST" action="https://jasna.app.n8n.cloud/webhook-test/webhook-test">
+    
+    <input
+      type="text"
+      name="name"
+      placeholder="Your name"
+      required
+    /><br /><br />
+
+    <input
+      type="email"
+      name="email"
+      placeholder="Email"
+      required
+    /><br /><br />
+
+    <input
+      type="text"
+      name="goal"
+      placeholder="Your goal"
+    /><br /><br />
+
+    <button type="submit">Sign up</button>
+  </form>
+
+</body>
+</html>
