@@ -35,23 +35,18 @@
     }
 
     .signup-container h2 {
-      font-size: 32px;
-      margin-bottom: 30px;
+      font-size: 30px;
+      margin-bottom: 25px;
       color: #333;
     }
 
     .signup-container input {
       width: 100%;
       padding: 14px;
-      font-size: 18px;
-      margin-bottom: 20px;
+      font-size: 16px;
+      margin-bottom: 18px;
       border-radius: 8px;
       border: 1px solid #ccc;
-    }
-
-    .signup-container input:focus {
-      border-color: #4f46e5;
-      outline: none;
     }
 
     .signup-container button {
@@ -69,41 +64,62 @@
     .signup-container button:hover {
       background-color: #4338ca;
     }
+
+    .success {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+      display: none;
+    }
   </style>
 </head>
 
 <body>
 
   <div class="signup-container">
-    <h2>Jasna's Innnovation Lab 🧪✨</h2>
+    <h2>Jasna's Innovation Lab 🧪✨</h2>
 
-    <form method="POST" action="https://jasna.app.n8n.cloud/webhook/webhook-test">
-      
-      <input
-        type="text"
-        name="name"
-        placeholder="Your name"
-        required
-      />
+    <form id="signupForm">
+      <input type="text" id="name" placeholder="Your name" required />
+      <input type="email" id="email" placeholder="Email" required />
 
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        required
-      />
-
-      <!-- Password field -->
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        required
-      />
+      <!-- Password removed from n8n flow -->
+      <input type="password" placeholder="Password (coming soon)" disabled />
 
       <button type="submit">Sign up</button>
     </form>
+
+    <div class="success" id="successMsg">
+      🎉 Signup successful! Check your email.
+    </div>
   </div>
+
+  <script>
+    const form = document.getElementById("signupForm");
+    const successMsg = document.getElementById("successMsg");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+
+      await fetch("https://jasna.app.n8n.cloud/webhook/webhook-test", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          source: "signup-page"
+        })
+      });
+
+      form.reset();
+      successMsg.style.display = "block";
+    });
+  </script>
 
 </body>
 </html>
